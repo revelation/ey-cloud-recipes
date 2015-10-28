@@ -1,0 +1,22 @@
+257  wget --no-check-certificate https://github.com/Red5/red5-server/releases/download/v1.0.2-RELEASE/red5-server-1.0.2-RELEASE-server.tar.gz
+  258  ls
+  259  ls -ltr
+  260  ls
+  261  mv 9b31888a-c0e8-11e3-9b0c-2bbbe5c5f6c8.gz\?response-content-disposition\=attachment\;\ filename\=red5-server-1.0.2-RELEASE-server.tar.gz\&AWSAccessKeyId\=AKIAISTNZFOVBIJMK3TQ\&Expires\=1409680471\&Signature\=DpwRkb03Nm2bmpFzt%2F4F2nTt2Bg\= red5.tar.gz
+  262  mkdir red4
+  263  mv red4 red5
+  264  mv red5.tar.gz red5/
+  265  cd red5
+  266  ls
+  267  gunzip red5.tar.gz
+  268  tar xvf red5.tar
+  269  mkdir /opt/red5/
+  270  rsync -av red5-server-1.0.2-RELEASE/ /opt/red5/
+  271  vim /etc/init.d/red5
+  272  rc-update add red5 runlevel1
+  273  rc-update add red5 default
+  274  chmod +x /etc/init.d/red5
+  275  rc-update add red5 default
+  276  ps -efa | grep red4
+  277  ps -efa | grep red5
+  278  /etc/init.d/red5 start
