@@ -1,0 +1,60 @@
+# This directive describes a set of servers, which can be used in directives proxy_pass and fastcgi_pass as a single entity. They can listen to server on different ports and furthermore, it is possible to simultaneously use a server that listens on both TCP and Unix sockets.
+# Review http://wiki.nginx.org/HttpUpstreamModule for more Documentation
+upstream upstream_<%= @app_name %> {
+  server unix:/var/run/engineyard/unicorn_<%= @app_name %>.sock fail_timeout=0;
+}
+
+server {
+  listen <%= @http_port %>;
+
+  server_name _;
+
+
+  if ( $host ~* ^74.201.255.93) {
+     rewrite ^(.*)$ https://studyspace.net$1 permanent;
+  }
+
+  if ( $host ~* ^studyspace.net) {
+     rewrite ^(.*)$ https://studyspace.net$1 permanent;
+  }
+
+  if ( $host ~* ^(.*).studyspace.net) {
+     set $subd $1;
+     rewrite ^(.*)$ https://$subd.studyspace.net$1 permanent;
+  }
+
+  root /data/<%= @app_name %>/current/public;
+
+  access_log /var/log/engineyard/nginx/<%= @app_name %>.access.log main;
+
+  # error_log /var/log/engineyard/nginx/<%= @app_name %>.error.log notice;
+  error_log /dev/null notice;
+
+  include /etc/nginx/common/servers.conf;
+
+  proxy_send_timeout         120;
+  proxy_read_timeout         120;
+
+  location / {
+
+    # auth is disabled for this server
+    # auth_basic            "Restricted";
+    # auth_basic_user_file  /etc/nginx/servers/<%= @app_name %>.users;
+
+    include /etc/nginx/common/proxy.conf;
+
+    if (!-f $request_filename) {
+      proxy_pass http://upstream_<%= @app_name %>;
+      break;
+    }
+
+    location /tmp/datasets/ {
+      internal;
+      root /data/<%= @app_name %>/current/;
+    }
+  }
+
+  location = /500.html {
+    root /data/<%= @app_name %>/current/public;
+  }
+}

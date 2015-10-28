@@ -1,3 +1,11 @@
+#include_recipe "nfs"
+include_recipe "delayed_job"
+include_recipe "packages"
+include_recipe "redis"
+include_recipe "redis-yml"
+include_recipe "nginx"
+include_recipe "red5"
+
 #execute "testing" do
 #  command %Q{
 #    echo "i ran at #{Time.now}" >> /root/cheftime
@@ -175,4 +183,3 @@
 
 #uncomment to include the motd customization related to the environment
 #include_recipe "env_motd"
-
