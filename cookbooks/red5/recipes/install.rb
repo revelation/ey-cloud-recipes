@@ -32,7 +32,7 @@ if app_master?
 
   bash "rsync-red5" do
     user node[:owner_name]
-    code "rsync -av /home/#{node[:owner_name]}/red5/ /opt/red5/"
+    code "rsync -av /home/#{node[:owner_name]}/#{node[:red5][:download_url].split("/").last.split("-server.tar.gz").first}/ /opt/red5/"
   end
 
   template "/etc/init.d/red5" do
