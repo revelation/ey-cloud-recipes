@@ -27,7 +27,7 @@ if app_master?
   bash "unpackage-red5" do
     user node[:owner_name]
     cwd "/home/#{node[:owner_name]}"
-    code "tar zxvf red5.tar.gz}"
+    code "tar zxvf red5.tar.gz"
   end
 
   bash "rsync-red5" do
