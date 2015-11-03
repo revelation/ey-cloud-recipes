@@ -19,6 +19,10 @@ server {
 
   root /data/<%= @app_name %>/current/public;
 
+  if ( $host ~* ^studyspace.eu) {
+     rewrite ^(.*)$ https://www.studyspace.eu$1 permanent;
+  }
+
   access_log /var/log/engineyard/nginx/<%= @app_name %>.access.log main;
   # error_log /var/log/engineyard/nginx/<%= @app_name %>.error.log notice;
   error_log /dev/null notice;

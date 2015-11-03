@@ -14,6 +14,10 @@ server {
      rewrite ^(.*)$ https://studyspace.net$1 permanent;
   }
 
+  if ( $host ~* ^studyspace.eu) {
+     rewrite ^(.*)$ https://www.studyspace.eu$1 permanent;
+  }
+
   if ( $host ~* ^studyspace.net) {
      rewrite ^(.*)$ https://studyspace.net$1 permanent;
   }
