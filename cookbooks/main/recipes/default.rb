@@ -1,4 +1,4 @@
-#include_recipe "nfs"
+include_recipe "nfs"
 include_recipe "delayed_job"
 include_recipe "packages"
 include_recipe "redis"

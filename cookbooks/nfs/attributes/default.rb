@@ -20,9 +20,9 @@
 #options = { 'nfs' => {'service' => {}, 'config' => {}, 'packages' => {} , 'port' => {} }}
 nfs(
   'instance_name' => 'utility',
-  'packages' => [ 'nfs-utils', 'portmap', 'File-NFSLock' ],
+  'packages' => [ 'nfs-utils', 'rpcbind', 'File-NFSLock' ],
   'service' =>  {
-                  'portmap' => 'portmap',
+                  'portmap' => 'rpcbind',
                   'lock'    => 'nfslock',
                   'server'  => 'nfs'
   },
@@ -39,5 +39,5 @@ nfs(
   'exports' => ["/data 172.31.0.0/16(rw,sync,no_root_squash)"],
 
   # Application specific settings
-  'links' => ["reports"]
+  'links' => ["tmp"]
 )
