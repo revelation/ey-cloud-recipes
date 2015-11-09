@@ -19,6 +19,8 @@ if app_server?
       code "touch /etc/nginx/servers/keep.#{app_name}.conf && touch /etc/nginx/servers/keep.#{app_name}.ssl.conf"
     end
 
+    nameserver = `cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`.chomp!
+
     template "/etc/nginx/servers/#{app_name}.conf" do
       source 'app.conf.erb'
       owner node[:owner_name]
@@ -27,7 +29,8 @@ if app_server?
       variables({
         :framework_env => node[:environment][:framework_env],
         :app_name => app_name,
-        :http_port => http_port
+        :http_port => http_port,
+        :nameserver => nameserver
       })
       notifies :run, resources(:execute => "restart-nginx"), :delayed
     end
@@ -39,7 +42,8 @@ if app_server?
       mode 0644
       variables({
         :app_name => app_name,
-        :https_port => https_port
+        :https_port => https_port,
+        :nameserver => nameserver
       })
       notifies :run, resources(:execute => "restart-nginx"), :delayed
     end
