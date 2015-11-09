@@ -111,8 +111,8 @@ server {
     proxy_buffering             off;
     proxy_intercept_errors      on;
 
-    resolver                    10.122.164.202 valid=300s;
-    resolver_timeout            10s;
+    #resolver                    10.122.164.202 valid=300s;
+    #resolver_timeout            10s;
 
     proxy_pass                  http://$s3_bucket/$url_full;
   }
@@ -131,8 +131,8 @@ server {
     proxy_buffering             off;
     proxy_intercept_errors      on;
 
-    resolver                    10.122.164.202 valid=300s;
-    resolver_timeout            10s;
+    #resolver                    10.122.164.202 valid=300s;
+    #resolver_timeout            10s;
 
     proxy_pass                  http://$s3_bucket/$url_full;
   }
