@@ -86,7 +86,6 @@ unless node[:name] == nfs_master[:name]
           to "/shared/#{app_name}/shared/#{link}/"
         end
 
-        # Set ownership as Chef 0.6.x link does not allow owner/group parameters
         bash "set-ownership-on-#{app_name}-#{link}" do
           code "chown -h #{node[:owner_name]}:#{node[:owner_name]} /data/#{app_name}/shared/#{link}"
         end
