@@ -87,7 +87,7 @@ server {
      location /reports/ {
        internal;
        expires 0;
-       root /data/<%= @app_name %>/current/;
+       root /data/<%= @app_name %>/current/tmp/;
     }
 
     location /quotes/ {
