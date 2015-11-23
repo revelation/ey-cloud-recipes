@@ -39,5 +39,5 @@ nfs(
   'exports' => ["/data 172.31.0.0/16(rw,sync,no_root_squash)"],
 
   # Application specific settings
-  'links' => ["tmp"]
+  'links' => ["reports"]
 )
