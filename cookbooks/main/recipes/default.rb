@@ -6,7 +6,7 @@ include_recipe "redis-yml"
 include_recipe "nginx"
 include_recipe "red5"
 include_recipe "papertrail"
-
+include_recipe "golang"
 
 #execute "testing" do
 #  command %Q{
